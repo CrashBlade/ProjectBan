@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class Main {
 
-	private static Producto producto, producto1;
-	private static Scanner entrada;
+	//Arreglo de 5 poscisiones para los productos
+	static Producto[] productosInventario = new Producto[5];
+
+	static Scanner entrada;
 
 	public static void main(String[] args) {
-		
+
 		menu();
 	}
 
@@ -20,16 +22,15 @@ public class Main {
 		System.out.println("4. Buscar producto");
 		System.out.println("5. Listar todos los productos");
 		System.out.println("6. Salir");
+		System.out.print("Opcion:");
 		entrada = new Scanner(System.in);
 		int op = entrada.nextInt();
 		switch (op) {
 		case 1:
-			producto = new Producto();
+			Producto producto = new Producto();
 			crearProducto(producto);
-			producto1 = new Producto();
-			crearProducto(producto1);
 			System.out.println(producto.toString());
-			System.out.println(producto1.toString());
+			System.out.println();
 			menu();
 			break;
 		case 2:
@@ -53,6 +54,7 @@ public class Main {
 
 	public static void crearProducto(Producto producto) {
 		entrada = new Scanner(System.in);
+		System.out.println();
 		System.out.println("Nombre: ");
 		try {
 			producto.setNombre(entrada.nextLine());
@@ -63,6 +65,31 @@ public class Main {
 		} catch (Exception ex) {
 			System.out.println("Fallo la creacion del producto");
 		}
+		agregarProductoInventario(producto);
+	}
+
+	public static void agregarProductoInventario(Producto producto){
+
+		//Evalua que que no se haya superado el max de posiciones para almacenar PRODUCTOS.
+		if(Producto.numeroDeProductos<=productosInventario.length) {
+			int poscision = 0;
+
+			//Recorre el arreglo en busqueda de una posicion disponible para almacenar el PRODUCTO
+			for (Producto forProducto : productosInventario) {
+				if (forProducto == null)
+					productosInventario[poscision] = producto;
+				else
+					++poscision;
+			}
+
+			//Imprime el producto para verificar sus poscisiones.
+			for (Producto forProducto : productosInventario
+			) {
+				System.out.println(forProducto);
+			}
+		}
+		else
+			System.out.println("Supero el maximo de productos creados");
 	}
 	/*
 	 * public Producto buscarProducto(String nombre, Producto[] arrProducto){ for
