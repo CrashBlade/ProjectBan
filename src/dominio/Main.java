@@ -7,14 +7,16 @@ public class Main {
 
 	// Arreglo de 5 poscisiones para los productos
 	static Producto[] productosInventario = new Producto[5];
-
+	static Inventario inventario = new Inventario();
+	private static Scanner entrada;
+	
 	public static void main(String[] args) {
 
 		menu();
 	}
 
 	public static void menu() {
-		Scanner entrada;
+
 		System.out.println("--- Elija una opcion ---");
 		System.out.println("1. Crear Producto");
 		System.out.println("2. Actualizar producto");
@@ -23,15 +25,13 @@ public class Main {
 		System.out.println("5. Listar todos los productos");
 		System.out.println("6. Salir");
 		System.out.print("Opcion:");
-		entrada = new Scanner(System.in);
+		entrada = new Scanner(System.in);		
 		try {
 			int op = entrada.nextInt();
 			switch (op) {
 			case 1:
-			Inventario inventario = new Inventario();
 			Producto producto = new Producto();
 			inventario.crearProducto(producto);
-			System.out.println(producto.toString());
 			System.out.println();
 			menu();
 				break;
@@ -40,7 +40,8 @@ public class Main {
 			case 3:
 				break;
 			case 4:
-				buscarProducto();
+				inventario.buscarProducto();
+				menu();
 				break;
 			case 5:
 				break;
@@ -57,64 +58,5 @@ public class Main {
 
 	}
 
-
-	public static void buscarProducto() {
-		String nombre;
-		entrada = new Scanner(System.in);
-		System.out.println("Ingrese el nombre del producto a buscar ");
-		try 
-		{
-			nombre = entrada.nextLine();
-			for (int i = 0; i < productosInventario.length; i++) 
-			{
-				if (productosInventario[i].getNombre() != null) 
-				{
-					if (productosInventario[i].getNombre().equals(nombre)) {
-						System.out.println(productosInventario[i]);
-						menu();
-						break;
-					}
-				}
-			}
-			System.out.println("No se encontro el producto: "+nombre);
-			menu();
-		}
-		catch(Exception ex)
-		{
-		
-		}
-	}
-
-	/*
-	 * public void actualizar(String nombre, String descripcion, double
-	 * precioCompra, double precioVenta, String unidadMedida, boolean estado){
-	 * 
-	 * if (nombre!=null) {
-	 * 
-	 * }
-	 * 
-	 * }
-	 * 
-	 * public String listar(){
-	 * 
-	 * return "Nombre producto: "+ producto.nombre + "\n" + "Descripcion : "+
-	 * producto.descripcion + "\n" + "Precio de Compra: "+ producto.precioCompra +
-	 * "\n" + "Precio de Venta: "+ producto.precioVenta + "\n" +
-	 * "Unidad de medida: "+producto.unidadMedida + "\n" + "Estado"+
-	 * producto.estado;
-	 * 
-	 * } // Listar por producto basado en nombre ( si el nombre es igual al que
-	 * ingresa por // argumento entonces se imprime por pantalla todos los campos)
-	 * public String listarPorProducto(String nombre){
-	 * 
-	 * if (nombre!=null) { } return nombre; }
-	 * 
-	 * public void eliminar(String ID, String nombre){}
-	 * 
-	 * public boolean existeProducto(){ return true; }
-	 * 
-	 * public String obtenerId(String nombre) { String id_Producto=""; return
-	 * id_Producto; }
-	 */
 
 }

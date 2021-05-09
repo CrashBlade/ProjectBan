@@ -11,15 +11,15 @@ public class Inventario {
 
         //Evalua que que no se haya superado el max de posiciones para almacenar PRODUCTOS.
         if(Producto.numeroDeProductos<=this.inventarioProductos.length) {
-            int poscision = 0;
+            int posicion = 0;
 
             //Recorre el arreglo en busqueda de una posicion disponible para almacenar el PRODUCTO
             for (Producto forProducto : this.inventarioProductos
             ) {
                 if (forProducto == null)
-                    this.inventarioProductos[poscision] = producto;
+                    this.inventarioProductos[posicion] = producto;
                 else
-                    ++poscision;
+                    ++posicion;
             }
 
             //Imprime el producto para verificar sus poscisiones.
@@ -49,5 +49,32 @@ public class Inventario {
 
         agregarProductoInventario(producto);
     }
+    public Producto buscarProducto() {
+		String nombre;
+		this.entrada = new Scanner(System.in);
+		System.out.println("Ingrese el nombre del producto a buscar ");
+		try 
+		{
+			nombre = entrada.nextLine();
+			for (int i = 0; i < this.inventarioProductos.length; i++) 
+			{
+				if (this.inventarioProductos[i].getNombre() != null) 
+				{
+					if (this.inventarioProductos[i].getNombre().equals(nombre)) {				
+						System.out.println(this.inventarioProductos[i]);
+						return this.inventarioProductos[i];
+					}
+				}
+			}
+			System.out.println("No se encontro el producto");
+			return null;
+			
+		}
+		catch(NullPointerException ex)
+		{
+			System.out.println("No existen productos en el inventario");
+			return null;
+		}
+	}
 
 }
