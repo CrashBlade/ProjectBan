@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-	//Arreglo de 5 poscisiones para los productos
+	// Arreglo de 5 poscisiones para los productos
 	static Producto[] productosInventario = new Producto[5];
 
 	static Scanner entrada;
@@ -24,30 +24,35 @@ public class Main {
 		System.out.println("6. Salir");
 		System.out.print("Opcion:");
 		entrada = new Scanner(System.in);
-		int op = entrada.nextInt();
-		switch (op) {
-		case 1:
-			Producto producto = new Producto();
-			crearProducto(producto);
-			System.out.println(producto.toString());
-			System.out.println();
-			menu();
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		case 5:
-			break;
-		case 6:
-			break;
-		default:
-			System.out.println("Ingrese una opcion entre 1 y 6");
-			menu();
-			break;
+		try {
+			int op = entrada.nextInt();
+			switch (op) {
+			case 1:
+				Producto producto = new Producto();
+				crearProducto(producto);
+				System.out.println(producto.toString());
+				System.out.println();
+				menu();
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				buscarProducto();
+				break;
+			case 5:
+				break;
+			case 6:
+				break;
+			default:
+				System.out.println("Ingrese una opcion entre 1 y 6");
+				menu();
+				break;
 
+			}
+		} catch (Exception ex) {
+			menu();
 		}
 
 	}
@@ -61,20 +66,22 @@ public class Main {
 			System.out.println("PrecioCompra: ");
 			producto.setPrecioCompra(entrada.nextDouble());
 			producto.setEstado(true);
-			
+
 		} catch (Exception ex) {
 			System.out.println("Fallo la creacion del producto");
 		}
 		agregarProductoInventario(producto);
 	}
 
-	public static void agregarProductoInventario(Producto producto){
+	public static void agregarProductoInventario(Producto producto) {
 
-		//Evalua que que no se haya superado el max de posiciones para almacenar PRODUCTOS.
-		if(Producto.numeroDeProductos<=productosInventario.length) {
+		// Evalua que que no se haya superado el max de posiciones para almacenar
+		// PRODUCTOS.
+		if (Producto.numeroDeProductos <= productosInventario.length) {
 			int poscision = 0;
 
-			//Recorre el arreglo en busqueda de una posicion disponible para almacenar el PRODUCTO
+			// Recorre el arreglo en busqueda de una posicion disponible para almacenar el
+			// PRODUCTO
 			for (Producto forProducto : productosInventario) {
 				if (forProducto == null)
 					productosInventario[poscision] = producto;
@@ -82,21 +89,42 @@ public class Main {
 					++poscision;
 			}
 
-			//Imprime el producto para verificar sus poscisiones.
-			for (Producto forProducto : productosInventario
-			) {
+			// Imprime el producto para verificar sus poscisiones.
+			for (Producto forProducto : productosInventario) {
 				System.out.println(forProducto);
 			}
-		}
-		else
+		} else
 			System.out.println("Supero el maximo de productos creados");
 	}
+
+	public static void buscarProducto() {
+		String nombre;
+		entrada = new Scanner(System.in);
+		System.out.println("Ingrese el nombre del producto a buscar ");
+		try 
+		{
+			nombre = entrada.nextLine();
+			for (int i = 0; i < productosInventario.length; i++) 
+			{
+				if (productosInventario[i].getNombre() != null) 
+				{
+					if (productosInventario[i].getNombre().equals(nombre)) {
+						System.out.println(productosInventario[i]);
+						menu();
+						break;
+					}
+				}
+			}
+			System.out.println("No se encontro el producto: "+nombre);
+			menu();
+		}
+		catch(Exception ex)
+		{
+		
+		}
+	}
+
 	/*
-	 * public Producto buscarProducto(String nombre, Producto[] arrProducto){ for
-	 * (int i=0; i<arrProducto.length;i++) { if
-	 * (arrProducto[i].nombre.equals(nombre)) { return arrProducto[i]; } } return
-	 * null; }
-	 * 
 	 * public void actualizar(String nombre, String descripcion, double
 	 * precioCompra, double precioVenta, String unidadMedida, boolean estado){
 	 * 
