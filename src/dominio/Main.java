@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 public class Main {
 
-	private static Producto producto, producto1;
-	private static Scanner entrada;
+	//Arreglo de 5 poscisiones para los productos
+	//static Producto[] productosInventario = new Producto[5];
+
+
 
 	public static void main(String[] args) {
-		
+
 		menu();
 	}
 
 	public static void menu() {
+		Scanner entrada;
 		System.out.println("--- Elija una opcion ---");
 		System.out.println("1. Crear Producto");
 		System.out.println("2. Actualizar producto");
@@ -20,16 +23,16 @@ public class Main {
 		System.out.println("4. Buscar producto");
 		System.out.println("5. Listar todos los productos");
 		System.out.println("6. Salir");
+		System.out.print("Opcion:");
 		entrada = new Scanner(System.in);
 		int op = entrada.nextInt();
 		switch (op) {
 		case 1:
-			producto = new Producto();
-			crearProducto(producto);
-			producto1 = new Producto();
-			crearProducto(producto1);
+			Inventario inventario = new Inventario();
+			Producto producto = new Producto();
+			inventario.crearProducto(producto);
 			System.out.println(producto.toString());
-			System.out.println(producto1.toString());
+			System.out.println();
 			menu();
 			break;
 		case 2:
@@ -51,19 +54,9 @@ public class Main {
 
 	}
 
-	public static void crearProducto(Producto producto) {
-		entrada = new Scanner(System.in);
-		System.out.println("Nombre: ");
-		try {
-			producto.setNombre(entrada.nextLine());
-			System.out.println("PrecioCompra: ");
-			producto.setPrecioCompra(entrada.nextDouble());
-			producto.setEstado(true);
-			
-		} catch (Exception ex) {
-			System.out.println("Fallo la creacion del producto");
-		}
-	}
+
+
+
 	/*
 	 * public Producto buscarProducto(String nombre, Producto[] arrProducto){ for
 	 * (int i=0; i<arrProducto.length;i++) { if

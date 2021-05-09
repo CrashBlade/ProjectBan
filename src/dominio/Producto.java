@@ -2,8 +2,8 @@ package dominio;
 
 public class Producto {
 
+    public static int numeroDeProductos;
     private final int id;
-    private static int numeroDeProductos;
     private String nombre;
     private String descripcion;
     private double precioCompra;
