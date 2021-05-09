@@ -4,10 +4,9 @@ import java.util.Scanner;
 
 public class Main {
 
+
 	// Arreglo de 5 poscisiones para los productos
 	static Producto[] productosInventario = new Producto[5];
-
-	static Scanner entrada;
 
 	public static void main(String[] args) {
 
@@ -15,6 +14,7 @@ public class Main {
 	}
 
 	public static void menu() {
+		Scanner entrada;
 		System.out.println("--- Elija una opcion ---");
 		System.out.println("1. Crear Producto");
 		System.out.println("2. Actualizar producto");
@@ -28,11 +28,12 @@ public class Main {
 			int op = entrada.nextInt();
 			switch (op) {
 			case 1:
-				Producto producto = new Producto();
-				crearProducto(producto);
-				System.out.println(producto.toString());
-				System.out.println();
-				menu();
+			Inventario inventario = new Inventario();
+			Producto producto = new Producto();
+			inventario.crearProducto(producto);
+			System.out.println(producto.toString());
+			System.out.println();
+			menu();
 				break;
 			case 2:
 				break;
@@ -49,7 +50,6 @@ public class Main {
 				System.out.println("Ingrese una opcion entre 1 y 6");
 				menu();
 				break;
-
 			}
 		} catch (Exception ex) {
 			menu();
@@ -57,45 +57,6 @@ public class Main {
 
 	}
 
-	public static void crearProducto(Producto producto) {
-		entrada = new Scanner(System.in);
-		System.out.println();
-		System.out.println("Nombre: ");
-		try {
-			producto.setNombre(entrada.nextLine());
-			System.out.println("PrecioCompra: ");
-			producto.setPrecioCompra(entrada.nextDouble());
-			producto.setEstado(true);
-
-		} catch (Exception ex) {
-			System.out.println("Fallo la creacion del producto");
-		}
-		agregarProductoInventario(producto);
-	}
-
-	public static void agregarProductoInventario(Producto producto) {
-
-		// Evalua que que no se haya superado el max de posiciones para almacenar
-		// PRODUCTOS.
-		if (Producto.numeroDeProductos <= productosInventario.length) {
-			int poscision = 0;
-
-			// Recorre el arreglo en busqueda de una posicion disponible para almacenar el
-			// PRODUCTO
-			for (Producto forProducto : productosInventario) {
-				if (forProducto == null)
-					productosInventario[poscision] = producto;
-				else
-					++poscision;
-			}
-
-			// Imprime el producto para verificar sus poscisiones.
-			for (Producto forProducto : productosInventario) {
-				System.out.println(forProducto);
-			}
-		} else
-			System.out.println("Supero el maximo de productos creados");
-	}
 
 	public static void buscarProducto() {
 		String nombre;
