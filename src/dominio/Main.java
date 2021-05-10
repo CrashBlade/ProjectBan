@@ -6,9 +6,9 @@ public class Main {
 
 
 	// Arreglo de 5 poscisiones para los productos
-	static Producto[] productosInventario = new Producto[5];
+	//static Producto[] productosInventario = new Producto[5];
 	static Inventario inventario = new Inventario();
-	private static Scanner entrada;
+	static Scanner entrada;
 	
 	public static void main(String[] args) {
 
@@ -26,16 +26,20 @@ public class Main {
 		System.out.println("6. Salir");
 		System.out.print("Opcion:");
 		entrada = new Scanner(System.in);		
+
 		try {
 			int op = entrada.nextInt();
 			switch (op) {
 			case 1:
-			Producto producto = new Producto();
-			inventario.crearProducto(producto);
-			System.out.println();
-			menu();
+				Producto producto = new Producto();
+				inventario.crearProducto(producto);
+				System.out.println();
+				menu();
 				break;
 			case 2:
+				System.out.println();
+				inventario.actualizarProducto();
+				menu();
 				break;
 			case 3:
 				break;

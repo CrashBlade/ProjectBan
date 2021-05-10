@@ -1,11 +1,10 @@
 package dominio;
-
 import java.util.Scanner;
 
 public class Inventario {
 
     public Producto inventarioProductos[] = new Producto[5];
-    private Scanner entrada;
+    public Scanner entrada;
 
     public void agregarProductoInventario(Producto producto){
 
@@ -32,7 +31,6 @@ public class Inventario {
             System.out.println("Supero el maximo de productos creados");
     }
 
-
     public void crearProducto(Producto producto) {
         this.entrada = new Scanner(System.in);
         System.out.println();
@@ -49,6 +47,30 @@ public class Inventario {
 
         agregarProductoInventario(producto);
     }
+
+    public Producto actualizarProducto(){
+
+        Producto productoActualizar = buscarProducto();
+        this.entrada = new Scanner(System.in);
+        System.out.println("Ingrese el nuevo nombre: ");
+
+      try {
+          productoActualizar.setNombre(this.entrada.nextLine());
+          System.out.println("Ingrese el nuevo precio de compra: ");
+          productoActualizar.setPrecioCompra(this.entrada.nextDouble());
+      }
+      catch (Exception ex){
+          System.out.println("Fallo en la actualizacion del producto");
+      }
+
+        for (Producto recorrerProductos: inventarioProductos
+             ) {
+            System.out.println(recorrerProductos);
+        }
+
+        return productoActualizar;
+    }
+
     public Producto buscarProducto() {
 		String nombre;
 		this.entrada = new Scanner(System.in);
@@ -68,7 +90,6 @@ public class Inventario {
 			}
 			System.out.println("No se encontro el producto");
 			return null;
-			
 		}
 		catch(NullPointerException ex)
 		{
@@ -76,5 +97,4 @@ public class Inventario {
 			return null;
 		}
 	}
-
 }
